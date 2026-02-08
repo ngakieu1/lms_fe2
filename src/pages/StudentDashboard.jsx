@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookOpen, Clock, BarChart } from 'lucide-react';
 
-const Home = () => {
+const StudentDashboard = () => {
   const courses = [
     { id: 1, title: 'Intro to Computer Science', progress: 75, due: '2 days' },
     { id: 2, title: 'Data Structures & Algorithms', progress: 30, due: '5 days' },
@@ -56,4 +56,4 @@ const styles = {
   progressBar: { height: '6px', backgroundColor: '#00b894', marginTop: '10px', borderRadius: '3px' }
 };
 
-export default Home;
+export default StudentDashboard;
