@@ -1,13 +1,13 @@
 import React from 'react';
 import {Shield, Server, UserPlus} from 'lucide-react';
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ onLogout }) => {
     return(
         <div>
             {/* Admin Navbar - Different color */}
             <nav className="navbar" style={{backgroundColor: '#2d3436'}}>
                 <span className="nav-brand">Admin Console</span>
-                <button onClick={() => window.location.reload()} className="logout-btn">Logout</button>
+                <button onClick={onLogout} className="logout-btn">Logout</button>
             </nav>
             <main className="dashboard-main">
                 <h2>System Overview</h2>

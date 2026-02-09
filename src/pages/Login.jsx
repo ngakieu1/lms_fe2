@@ -26,14 +26,16 @@ const Login = ({setAuth}) => {
             });
             if (response.ok){
                 const data = await response.json();
-                localStorage.setItem('token', data.accessToken);
-                //1. Save user info
+                //1. Save tokens
+                localStorage.setItem('accessToken', data.accessToken);
+                localStorage.setItem('refreshToken', data.refreshToken); //for logout
+                //2. Set state
                 const userRole = data.role;
                 setAuth({
                     isAuthenticated: true,
                     role: userRole
                 });
-                //2. Redirect based on role
+                //3. Redirect based on role
                 if (userRole === 'ADMIN') navigate('/admin');
                 else if (userRole === 'TEACHER') navigate('/teacher');
                 else navigate('/student'); 
@@ -53,7 +55,7 @@ const Login = ({setAuth}) => {
                 <div className='login-image-section'>
                     <img src={loginImage} alt="Login" style={{width: '100%', marginBottom: '1rem'}} className='login-image' />
                 </div>
-                <h2>LMS Portal Login</h2>
+                <h2>LMS Portal</h2>
                 {error && <div style={styles.error}>{error}</div>}
                 <form onSubmit={handleLogin} style={styles.form}>
                     <input
@@ -109,7 +111,8 @@ passwordInput: {
 },
 eyeIcon: {
   cursor: 'pointer',
-  color: '#666'
+  color: '#666',
+
 }
 };
 

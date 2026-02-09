@@ -1,13 +1,13 @@
 import React from 'react';
 import {Users, FileText, CheckCircle} from 'lucide-react';
 
-const TeacherDashboard = () => {
+const TeacherDashboard = ({ onLogout }) => {
     return (
         <div>
             {/* Teacher Navbar - Different color */}
             <nav className="navbar" style={{backgroundColor: '#4834d4'}}>
                 <span className="nav-brand">Instructor Panel</span>
-                <button onClick={() => window.location.reload()} className="logout-btn">Logout</button>
+                <button onClick={onLogout} className="logout-btn">Logout</button>
             </nav>
             <main className="dashboard-main">
                 <h2>Classroom Management</h2>

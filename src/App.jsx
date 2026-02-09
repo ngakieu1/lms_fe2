@@ -22,6 +22,36 @@ function App() {
     isAuthenticated: false,
     role: null
   });
+  const handleLogout = async () => {
+    // 1. Get the token from storage
+    const refreshToken = localStorage.getItem('refreshToken');
+    
+    // 2. Call Backend (if token exists)
+    if (refreshToken) {
+      try {
+        await fetch('http://localhost:8080/aims_test/api/auth/logout', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json' 
+          },
+          // Matches your LogoutRequest Java class
+          body: JSON.stringify({ 
+            refreshToken: refreshToken 
+          }), 
+        });
+      } catch (error) {
+        console.error("Logout failed on server, cleaning up client anyway.", error);
+      }
+    }
+
+    // 3. Always clean up Frontend (Client-side logout)
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('userRole'); // Optional, if you stored it
+    
+    // 4. Reset State (Triggers redirect to Login)
+    setUser({ isAuthenticated: false, role: null });
+  };
 
   return (
     <Router>
@@ -33,14 +63,14 @@ function App() {
         {/* ADMIN ROUTE*/}
         <Route 
           path="/admin" 
-          element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminDashboard/></PrivateRoute>} 
+          element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminDashboard onLogout={handleLogout}/></PrivateRoute>} 
         />
         {/* TEACHER ROUTE */}
         <Route 
           path="/teacher"
           element={
             <PrivateRoute user={user} allowedRole="TEACHER">
-              <TeacherDashboard />
+              <TeacherDashboard onLogout={handleLogout} />
             </PrivateRoute>
           } 
         />
@@ -50,7 +80,7 @@ function App() {
           path="/student" 
           element={
             <PrivateRoute user={user} allowedRole="STUDENT">
-              <StudentDashboard />
+              <StudentDashboard onLogout={handleLogout} />
             </PrivateRoute>
           } 
         />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookOpen, Clock, BarChart } from 'lucide-react';
 
-const StudentDashboard = () => {
+const StudentDashboard = ({ onLogout }) => {
   const courses = [
     { id: 1, title: 'Intro to Computer Science', progress: 75, due: '2 days' },
     { id: 2, title: 'Data Structures & Algorithms', progress: 30, due: '5 days' },
@@ -13,7 +13,7 @@ const StudentDashboard = () => {
       {/* Navbar */}
       <nav style={styles.navbar}>
         <h1>My LMS Dashboard</h1>
-        <button onClick={() => window.location.reload()} style={styles.logout}>Logout</button>
+        <button onClick={onLogout} style={styles.logout}>Logout</button>
       </nav>
 
       {/* Main Content */}
