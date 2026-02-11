@@ -29,15 +29,15 @@ const Login = ({setAuth}) => {
                 //1. Save tokens
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('refreshToken', data.refreshToken); //for logout
+                localStorage.setItem('userRole', data.role);
                 //2. Set state
-                const userRole = data.role;
                 setAuth({
                     isAuthenticated: true,
-                    role: userRole
+                    role: data.role
                 });
                 //3. Redirect based on role
-                if (userRole === 'ADMIN') navigate('/admin');
-                else if (userRole === 'TEACHER') navigate('/teacher');
+                if (data.role === 'ADMIN') navigate('/admin');
+                else if (data.role === 'TEACHER') navigate('/teacher');
                 else navigate('/student'); 
             } else {
                 setError('Invalid credentials.');

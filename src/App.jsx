@@ -18,9 +18,13 @@ const PrivateRoute = ({ user, children, allowedRole }) => {
   return children;
 };
 function App() {
-  const [user, setUser] = useState({
-    isAuthenticated: false,
-    role: null
+  const [user, setUser] = useState(() => {
+    const savedToken = localStorage.getItem('accessToken');
+    const savedRole = localStorage.getItem('userRole');
+    return {
+      isAuthenticated: !!savedToken,
+      role: savedRole || null,
+    };
   });
   const handleLogout = async () => {
     // 1. Get the token from storage
@@ -29,12 +33,12 @@ function App() {
     // 2. Call Backend (if token exists)
     if (refreshToken) {
       try {
-        await fetch('http://localhost:8080/aims_test/api/auth/logout', {
+        await fetch('/aims_test/api/auth/logout', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json' 
           },
-          // Matches your LogoutRequest Java class
+          
           body: JSON.stringify({ 
             refreshToken: refreshToken 
           }), 
@@ -52,8 +56,7 @@ function App() {
     // 4. Reset State (Triggers redirect to Login)
     setUser({ isAuthenticated: false, role: null });
   };
-
-  return (
+return (
     <Router>
       <Routes>
         <Route 
