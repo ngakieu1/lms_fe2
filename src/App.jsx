@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import StudentDashboard from './pages/StudentDashboard'
 import TeacherDashboard from './pages/TeacherDashboard'
 import AdminDashboard from './pages/AdminDashboard'
+import ForgotPassword from './pages/ForgotPassword'
 
 const PrivateRoute = ({ user, children, allowedRole }) => {
   if (!user.isAuthenticated) {
@@ -62,6 +63,10 @@ return (
         <Route 
           path="/login" 
           element={<Login setAuth={setUser} />} 
+        />
+        <Route 
+          path="/forgot-password" 
+          element={<ForgotPassword />} 
         />
         {/* ADMIN ROUTE*/}
         <Route 

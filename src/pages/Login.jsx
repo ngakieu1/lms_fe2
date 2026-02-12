@@ -79,6 +79,15 @@ const Login = ({setAuth}) => {
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </span>
                     </div>
+                    <div style={{marginTop: '1rem', fontSize: '0.9rem'}}>
+                        <span style={{color: '#666'}}>Quên mật khẩu? </span>
+                        <span 
+                            onClick={() => navigate('/forgot-password')} 
+                            style={{color: '#007bff', cursor: 'pointer', fontWeight: 'bold'}}
+                        >
+                            Lấy lại mật khẩu
+                        </span>
+                    </div>
                     <button type="submit" style={{...styles.button, opacity: isLoading ? 0.7 : 1}} disabled={isLoading}>{isLoading ? 'Signing In...' : 'Login'} </button>
                 </form>
             </div>
