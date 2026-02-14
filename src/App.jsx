@@ -5,6 +5,7 @@ import StudentDashboard from './pages/StudentDashboard'
 import TeacherDashboard from './pages/TeacherDashboard'
 import AdminDashboard from './pages/AdminDashboard'
 import ForgotPassword from './pages/ForgotPassword'
+import PermissionMatrix from './pages/admin/PermissionMatrix';
 
 const PrivateRoute = ({ user, children, allowedRole }) => {
   if (!user.isAuthenticated) {
@@ -72,6 +73,10 @@ return (
         <Route 
           path="/admin" 
           element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminDashboard onLogout={handleLogout}/></PrivateRoute>} 
+        />
+        <Route 
+          path="/admin/roles/permission-matrix" 
+          element={<PrivateRoute user={user} allowedRole="ADMIN"><PermissionMatrix /></PrivateRoute>} 
         />
         {/* TEACHER ROUTE */}
         <Route 

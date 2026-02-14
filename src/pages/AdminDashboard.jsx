@@ -1,7 +1,9 @@
 import React from 'react';
-import {Shield, Server, UserPlus} from 'lucide-react';
+import {Shield, Server, UserPlus, Key} from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = ({ onLogout }) => {
+    const navigate = useNavigate();
     return(
         <div>
             {/* Admin Navbar - Different color */}
@@ -19,6 +21,11 @@ const AdminDashboard = ({ onLogout }) => {
                 <div style={{marginTop: '2rem'}}>
                     <h3>Quick Actions</h3>
                     <div style={{display: 'flex', gap: '1rem', marginTop: '1rem'}}>
+                        <button onClick={() => navigate('/admin/roles/permission-matrix')} className="btn-primary" 
+                            style={{backgroundColor: '#8e44ad', display: 'flex', alignItems: 'center', gap: '8px'}}>
+                            <Key size={18} />
+                            Manage Permissions
+                        </button>
                         <button className="btn-primary" style={{backgroundColor: '#27ae60'}}>Add New User</button>
                         <button className="btn-primary" style={{backgroundColor: '#e74c3c'}}>View Audit Logs</button>
                     </div>
