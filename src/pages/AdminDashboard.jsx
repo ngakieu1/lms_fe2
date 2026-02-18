@@ -21,6 +21,14 @@ const AdminDashboard = ({ onLogout }) => {
                 <div style={{marginTop: '2rem'}}>
                     <h3>Quick Actions</h3>
                     <div style={{display: 'flex', gap: '1rem', marginTop: '1rem'}}>
+                        <button 
+                            onClick={() => navigate('/admin/roles')} // <--- Change this to point to the new Role Management page
+                            className="btn-primary" 
+                            style={{backgroundColor: '#8e44ad', display: 'flex', alignItems: 'center', gap: '8px'}}
+                            >
+                            <Key size={18} />
+                            Quản lý Nhóm Quyền (Roles)
+                        </button>
                         <button onClick={() => navigate('/admin/roles/permission-matrix')} className="btn-primary" 
                             style={{backgroundColor: '#8e44ad', display: 'flex', alignItems: 'center', gap: '8px'}}>
                             <Key size={18} />

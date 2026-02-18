@@ -36,8 +36,8 @@ const Login = ({setAuth}) => {
                     role: data.role
                 });
                 //3. Redirect based on role
-                if (data.role === 'ADMIN') navigate('/admin');
-                else if (data.role === 'TEACHER') navigate('/teacher');
+                if (data.role.startsWith('ADMIN')) navigate('/admin');
+                else if (data.role.startsWith ('TEACHER')) navigate('/teacher');
                 else navigate('/student'); 
             } else {
                 setError('Invalid credentials.');

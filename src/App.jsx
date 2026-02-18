@@ -6,6 +6,7 @@ import TeacherDashboard from './pages/TeacherDashboard'
 import AdminDashboard from './pages/AdminDashboard'
 import ForgotPassword from './pages/ForgotPassword'
 import PermissionMatrix from './pages/admin/PermissionMatrix';
+import RoleManagement from './pages/admin/RoleManagement';
 
 const PrivateRoute = ({ user, children, allowedRole }) => {
   if (!user.isAuthenticated) {
@@ -13,7 +14,7 @@ const PrivateRoute = ({ user, children, allowedRole }) => {
   }
   
   // If a role is required and the user doesn't have it
-  if (allowedRole && user.role !== allowedRole) {
+  if (allowedRole && user.role && !user.role.startsWith(allowedRole)) {
     return <Navigate to="/login" replace />;
   }
 
@@ -73,6 +74,14 @@ return (
         <Route 
           path="/admin" 
           element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminDashboard onLogout={handleLogout}/></PrivateRoute>} 
+        />
+        <Route 
+          path="/admin/roles" 
+          element={
+            <PrivateRoute user={user} allowedRole="ADMIN">
+              <RoleManagement />
+            </PrivateRoute>
+          } 
         />
         <Route 
           path="/admin/roles/permission-matrix" 
