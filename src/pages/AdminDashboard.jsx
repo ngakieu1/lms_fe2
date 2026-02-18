@@ -1,16 +1,11 @@
 import React from 'react';
+import AdminLayout from '../components/admin/AdminLayout';
 import {Shield, Server, UserPlus, Key} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const AdminDashboard = ({ onLogout }) => {
+const AdminDashboard = () => {
     const navigate = useNavigate();
     return(
-        <div>
-            {/* Admin Navbar - Different color */}
-            <nav className="navbar" style={{backgroundColor: '#2d3436'}}>
-                <span className="nav-brand">Admin Console</span>
-                <button onClick={onLogout} className="logout-btn">Logout</button>
-            </nav>
             <main className="dashboard-main">
                 <h2>System Overview</h2>
                 <div className="stats-container">
@@ -22,7 +17,7 @@ const AdminDashboard = ({ onLogout }) => {
                     <h3>Quick Actions</h3>
                     <div style={{display: 'flex', gap: '1rem', marginTop: '1rem'}}>
                         <button 
-                            onClick={() => navigate('/admin/roles')} // <--- Change this to point to the new Role Management page
+                            onClick={() => navigate('/admin/roles')} 
                             className="btn-primary" 
                             style={{backgroundColor: '#8e44ad', display: 'flex', alignItems: 'center', gap: '8px'}}
                             >
@@ -39,7 +34,6 @@ const AdminDashboard = ({ onLogout }) => {
                     </div>
                 </div>
             </main>
-        </div>
-    )
-}
+    );
+};
 export default AdminDashboard;

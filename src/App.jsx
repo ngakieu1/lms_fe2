@@ -7,6 +7,7 @@ import AdminDashboard from './pages/AdminDashboard'
 import ForgotPassword from './pages/ForgotPassword'
 import PermissionMatrix from './pages/admin/PermissionMatrix';
 import RoleManagement from './pages/admin/RoleManagement';
+import AdminLayout from './components/admin/AdminLayout'
 
 const PrivateRoute = ({ user, children, allowedRole }) => {
   if (!user.isAuthenticated) {
@@ -71,22 +72,18 @@ return (
           element={<ForgotPassword />} 
         />
         {/* ADMIN ROUTE*/}
-        <Route 
-          path="/admin" 
-          element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminDashboard onLogout={handleLogout}/></PrivateRoute>} 
-        />
-        <Route 
-          path="/admin/roles" 
+        <Route
+          path="/admin"
           element={
             <PrivateRoute user={user} allowedRole="ADMIN">
-              <RoleManagement />
+              <AdminLayout onLogout={handleLogout} />
             </PrivateRoute>
-          } 
-        />
-        <Route 
-          path="/admin/roles/permission-matrix" 
-          element={<PrivateRoute user={user} allowedRole="ADMIN"><PermissionMatrix /></PrivateRoute>} 
-        />
+          }
+        >
+          <Route index element={<AdminDashboard />} />
+          <Route path="roles" element={<RoleManagement />} />
+          <Route path="roles/permission-matrix" element={<PermissionMatrix />} />
+        </Route>
         {/* TEACHER ROUTE */}
         <Route 
           path="/teacher"
