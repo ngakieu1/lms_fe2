@@ -27,10 +27,12 @@ const menuItems = [
     title: 'Hệ thống',
     icon: <Settings size={20} />,
     children: [
+      { title: 'Quản lý Tài khoản', path: '/admin/users', icon: <Users size={18} /> },
       { title: 'Quản lý Nhóm Quyền', path: '/admin/roles', icon: <Users size={18} /> },
       { title: 'Ma trận Phân Quyền', path: '/admin/roles/permission-matrix', icon: <Settings size={18} /> },
     ],
   },
+
 ];
 const Sidebar = ({isCollapsed, onLogout}) => {
     const [openSubMenu, setOpenSubMenu] = useState(null);

@@ -7,7 +7,8 @@ import AdminDashboard from './pages/AdminDashboard'
 import ForgotPassword from './pages/ForgotPassword'
 import PermissionMatrix from './pages/admin/PermissionMatrix';
 import RoleManagement from './pages/admin/RoleManagement';
-import AdminLayout from './components/admin/AdminLayout'
+import AdminLayout from './components/admin/AdminLayout';
+import UserManagement from './pages/admin/UserManagement';
 
 const PrivateRoute = ({ user, children, allowedRole }) => {
   if (!user.isAuthenticated) {
@@ -83,6 +84,7 @@ return (
           <Route index element={<AdminDashboard />} />
           <Route path="roles" element={<RoleManagement />} />
           <Route path="roles/permission-matrix" element={<PermissionMatrix />} />
+          <Route path="users" element={<UserManagement />} />
         </Route>
         {/* TEACHER ROUTE */}
         <Route 
