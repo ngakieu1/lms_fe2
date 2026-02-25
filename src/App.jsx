@@ -9,6 +9,7 @@ import PermissionMatrix from './pages/admin/PermissionMatrix';
 import RoleManagement from './pages/admin/RoleManagement';
 import AdminLayout from './components/admin/AdminLayout';
 import UserManagement from './pages/admin/UserManagement';
+import MaterialManagement from './pages/admin/MaterialManagement';
 
 const PrivateRoute = ({ user, children, allowedRole }) => {
   if (!user.isAuthenticated) {
@@ -85,7 +86,13 @@ return (
           <Route path="roles" element={<RoleManagement />} />
           <Route path="roles/permission-matrix" element={<PermissionMatrix />} />
           <Route path="users" element={<UserManagement />} />
+          <Route path="materials" element={<MaterialManagement />} />
         </Route>
+        {/* <Route path="/admin" element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminLayout onLogout={handleLogout}><AdminDashboard /></AdminLayout></PrivateRoute>} />
+        <Route path="/admin/roles" element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminLayout onLogout={handleLogout}><RoleManagement /></AdminLayout></PrivateRoute>} />
+        <Route path="/admin/roles/permission-matrix" element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminLayout onLogout={handleLogout}><PermissionMatrix /></AdminLayout></PrivateRoute>} />
+        <Route path="/admin/users" element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminLayout onLogout={handleLogout}><UserManagement /></AdminLayout></PrivateRoute>} />
+        <Route path="/materials" element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminLayout onLogout={handleLogout}><MaterialManagement /></AdminLayout></PrivateRoute>} /> */}
         {/* TEACHER ROUTE */}
         <Route 
           path="/teacher"
@@ -94,6 +101,14 @@ return (
               <TeacherDashboard onLogout={handleLogout} />
             </PrivateRoute>
           } 
+        />
+        <Route
+          path="/teacher/materials"
+          element={
+            <PrivateRoute user={user} allowedRole="TEACHER">
+              <MaterialManagement onLogout={handleLogout} />
+            </PrivateRoute>
+          }
         />
 
         {/* STUDENT ROUTE */}

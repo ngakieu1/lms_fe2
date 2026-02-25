@@ -13,6 +13,7 @@ const menuItems = [
         children:[
             {title: 'Quản lý Lớp học', path: '/admin/classes', icon: <BookOpen size={18} />},
             { title: 'Quản lý buổi học', path: '/admin/sessions', icon: <Calendar size={18} /> },
+            { title: 'Quản lý Học liệu (Kho tài liệu)', path: '/admin/materials', icon: <FileText size={18} /> },
         ],
     },
     {

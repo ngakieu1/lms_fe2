@@ -30,6 +30,7 @@ const Login = ({setAuth}) => {
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('refreshToken', data.refreshToken); //for logout
                 localStorage.setItem('userRole', data.role);
+                localStorage.setItem('permissions', JSON.stringify(data.permissions));
                 //2. Set state
                 setAuth({
                     isAuthenticated: true,
