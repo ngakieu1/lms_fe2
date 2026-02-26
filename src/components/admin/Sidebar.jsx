@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import logo from '../../assets/login-image.png';
 
-const menuItems = [
+const adminMenuItems = [
     {
         title: 'Vận hành',
         icon: <Settings size={20}/>,
@@ -33,11 +33,26 @@ const menuItems = [
       { title: 'Ma trận Phân Quyền', path: '/admin/roles/permission-matrix', icon: <Settings size={18} /> },
     ],
   },
-
+];
+const teacherMenuItems = [
+    {
+        title: 'Giảng dạy',
+        icon: <BookOpen size={20} />,
+        children: [
+            {title: 'Bảng điều khiển', path: '/teacher', icon: <Users size={18} />},
+            {title: 'Kho tài liệu', path: '/teacher/materials', icon: <FileText size={18} />},
+        ],
+    },
 ];
 const Sidebar = ({isCollapsed, onLogout}) => {
     const [openSubMenu, setOpenSubMenu] = useState(null);
     const location = useLocation();
+    // Doc role tu bo nho de chon dung Menu
+    const userRole = localStorage.getItem('userRole') || '';
+    const isTeacher = userRole.startsWith('TEACHER');
+    // Neu la teacher -> dung menu teacher, nguoc lai dung menu admin
+    const currentMenuItems = isTeacher ? teacherMenuItems : adminMenuItems;
+    
     const toggleSubMenu = (index) => {
         setOpenSubMenu(openSubMenu === index ? null : index);
     };
@@ -60,7 +75,7 @@ const Sidebar = ({isCollapsed, onLogout}) => {
             </div>
             {/*Menu items*/}
             <div style={{ flex: 1 }}>
-                {menuItems.map((item, index) => (
+                {currentMenuItems.map((item, index) => (
                 <div key={index}>
                     <div 
                     onClick={() => toggleSubMenu(index)}

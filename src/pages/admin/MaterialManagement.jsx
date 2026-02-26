@@ -3,13 +3,8 @@ import api from '../../api/axios';
 import AdminLayout from '../../components/admin/AdminLayout';
 import Protect from '../../components/Protect';
 import {Search, FileUp, Edit, Trash2, FileText, Video, Image as ImageIcon, ArrowLeft} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
-const MaterialManagement = ({onLogout}) => {
-    const userRole = localStorage.getItem('userRole') || '';
-    const isAdmin = userRole.startsWith('ADMIN');
-    const navigate = useNavigate();
-
+const MaterialManagement = () => {
     const [materials, setMaterials] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -199,33 +194,7 @@ const MaterialManagement = ({onLogout}) => {
       )}
     </div>
   );
-
-  // === RENDER LAYOUT ĐỘNG TÙY THEO ROLE ===
-  if (isAdmin) {
-      // Nếu là Admin -> Dùng AdminLayout (Có Sidebar bên trái)
-      return pageContent;
-  } else {
-      // Nếu là Teacher -> Không có Sidebar, tự custom một Navbar đơn giản phía trên
-      return (
-          <div style={{ background: '#f5f6fa', minHeight: '100vh' }}>
-              {/* Navbar cho Teacher */}
-              <div style={{ background: '#2c3e50', padding: '15px 30px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                      <button onClick={() => navigate('/teacher')} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-                          <ArrowLeft size={20} style={{marginRight: '5px'}}/> Trở về Dashboard
-                      </button>
-                      <h2 style={{ margin: 0 }}>Học Liệu Dành Cho Giáo Viên</h2>
-                  </div>
-                  <button onClick={onLogout} style={{ background: '#e74c3c', color: 'white', border: 'none', padding: '8px 15px', borderRadius: '4px', cursor: 'pointer' }}>Đăng xuất</button>
-              </div>
-              
-              {/* Nội dung bảng (bên dưới Navbar) */}
-              <div style={{ padding: '30px' }}>
-                  {pageContent}
-              </div>
-          </div>
-      );
-  }
+  return pageContent;
 };
 const styles = {
   th: { padding: '12px', textAlign: 'left', color: '#555' }, td: { padding: '12px' },

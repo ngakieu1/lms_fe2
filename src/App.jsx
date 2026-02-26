@@ -88,28 +88,18 @@ return (
           <Route path="users" element={<UserManagement />} />
           <Route path="materials" element={<MaterialManagement />} />
         </Route>
-        {/* <Route path="/admin" element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminLayout onLogout={handleLogout}><AdminDashboard /></AdminLayout></PrivateRoute>} />
-        <Route path="/admin/roles" element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminLayout onLogout={handleLogout}><RoleManagement /></AdminLayout></PrivateRoute>} />
-        <Route path="/admin/roles/permission-matrix" element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminLayout onLogout={handleLogout}><PermissionMatrix /></AdminLayout></PrivateRoute>} />
-        <Route path="/admin/users" element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminLayout onLogout={handleLogout}><UserManagement /></AdminLayout></PrivateRoute>} />
-        <Route path="/materials" element={<PrivateRoute user={user} allowedRole="ADMIN"><AdminLayout onLogout={handleLogout}><MaterialManagement /></AdminLayout></PrivateRoute>} /> */}
         {/* TEACHER ROUTE */}
         <Route 
           path="/teacher"
           element={
             <PrivateRoute user={user} allowedRole="TEACHER">
-              <TeacherDashboard onLogout={handleLogout} />
+              <AdminLayout onLogout={handleLogout} />
             </PrivateRoute>
           } 
-        />
-        <Route
-          path="/teacher/materials"
-          element={
-            <PrivateRoute user={user} allowedRole="TEACHER">
-              <MaterialManagement onLogout={handleLogout} />
-            </PrivateRoute>
-          }
-        />
+        >
+          <Route index element={<TeacherDashboard />} />
+          <Route path="materials" element={<MaterialManagement />} />
+        </Route>
 
         {/* STUDENT ROUTE */}
         <Route 

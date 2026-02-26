@@ -3,16 +3,12 @@ import {Users, FileText, CheckCircle} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Protect from '../components/Protect';
 
-const TeacherDashboard = ({ onLogout }) => {
+const TeacherDashboard = () => {
     const navigate = useNavigate();
     return (
         <div>
             {/* Teacher Navbar - Different color */}
-            <nav className="navbar" style={{backgroundColor: '#4834d4'}}>
-                <span className="nav-brand">Instructor Panel</span>
-                <button onClick={onLogout} className="logout-btn">Logout</button>
-            </nav>
-            <main className="dashboard-main">
+            <main className="dashboard-main" style={{ padding: '10px' }}>
                 <h2>Classroom Management</h2>
                 <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
                     <Protect requiredPermission="VIEW_DOC">
