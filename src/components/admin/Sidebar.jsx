@@ -5,6 +5,7 @@ import {
     ChevronDown, ChevronRight, LogOut
 } from 'lucide-react';
 import logo from '../../assets/login-image.png';
+import { AlertCircle } from 'lucide-react';
 
 const adminMenuItems = [
     {
@@ -14,6 +15,7 @@ const adminMenuItems = [
             {title: 'Quản lý Lớp học', path: '/admin/classes', icon: <BookOpen size={18} />},
             { title: 'Quản lý buổi học', path: '/admin/sessions', icon: <Calendar size={18} /> },
             { title: 'Quản lý Học liệu (Kho tài liệu)', path: '/admin/materials', icon: <FileText size={18} /> },
+            {title: 'Duyệt xin nghỉ', path: '/admin/approvals', icon: <AlertCircle size={18} /> },
         ],
     },
     {
@@ -41,18 +43,34 @@ const teacherMenuItems = [
         children: [
             {title: 'Bảng điều khiển', path: '/teacher', icon: <Users size={18} />},
             {title: 'Kho tài liệu', path: '/teacher/materials', icon: <FileText size={18} />},
+            { title: 'Quản lý lịch rảnh', path: '/teacher/availability', icon: <Calendar size={18} /> },
+            { title: 'Lịch dạy của tôi', path: '/teacher/my-schedule', icon: <Calendar size={18} /> },
+        ],
+    },
+];
+const studentMenuItems = [
+    {
+        title: 'Góc Học Tập',
+        icon: <BookOpen size={20} />,
+        children: [
+            {title: 'Bảng điều khiển', path: '/student', icon: <Users size={18} /> },
+            { title: 'Lịch học của tôi', path: '/student/my-schedule', icon: <Calendar size={18} /> },
         ],
     },
 ];
 const Sidebar = ({isCollapsed, onLogout}) => {
     const [openSubMenu, setOpenSubMenu] = useState(null);
     const location = useLocation();
-    // Doc role tu bo nho de chon dung Menu
+
+    // 2. LOGIC CHỌN MENU MỚI
     const userRole = localStorage.getItem('userRole') || '';
-    const isTeacher = userRole.startsWith('TEACHER');
-    // Neu la teacher -> dung menu teacher, nguoc lai dung menu admin
-    const currentMenuItems = isTeacher ? teacherMenuItems : adminMenuItems;
-    
+    let currentMenuItems = adminMenuItems; // Mặc định là Admin
+
+    if (userRole.startsWith('TEACHER')) {
+        currentMenuItems = teacherMenuItems;
+    } else if (userRole.startsWith('STUDENT')) {
+        currentMenuItems = studentMenuItems; // Nếu là Student thì gán Menu Student
+    }
     const toggleSubMenu = (index) => {
         setOpenSubMenu(openSubMenu === index ? null : index);
     };

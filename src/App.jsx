@@ -10,6 +10,12 @@ import RoleManagement from './pages/admin/RoleManagement';
 import AdminLayout from './components/admin/AdminLayout';
 import UserManagement from './pages/admin/UserManagement';
 import MaterialManagement from './pages/admin/MaterialManagement';
+import TeacherAvailabilityLogic from './pages/teacher/TeacherAvailabilityLogic';
+import AdminApproval from './pages/admin/AdminApproval';
+import ClassManagement from './pages/admin/ClassManagement';
+import TeacherSchedule from './pages/teacher/TeacherSchedule';
+import StudentSchedule from './pages/student/StudentSchedule';
+import SessionManagement from './components/admin/SessionManagement';
 
 const PrivateRoute = ({ user, children, allowedRole }) => {
   if (!user.isAuthenticated) {
@@ -87,6 +93,10 @@ return (
           <Route path="roles/permission-matrix" element={<PermissionMatrix />} />
           <Route path="users" element={<UserManagement />} />
           <Route path="materials" element={<MaterialManagement />} />
+          <Route path="approvals" element={<AdminApproval />} />
+          <Route path="sessions" element={<SessionManagement />} />
+          {/* <Route path="teacher-availability" element={<AdminTeacherAvailability />} /> */}
+          <Route path="classes" element={<ClassManagement />} />
         </Route>
         {/* TEACHER ROUTE */}
         <Route 
@@ -99,6 +109,8 @@ return (
         >
           <Route index element={<TeacherDashboard />} />
           <Route path="materials" element={<MaterialManagement />} />
+          <Route path="availability" element={<TeacherAvailabilityLogic />} />
+          <Route path="my-schedule" element={<TeacherSchedule />} />
         </Route>
 
         {/* STUDENT ROUTE */}
@@ -106,10 +118,13 @@ return (
           path="/student" 
           element={
             <PrivateRoute user={user} allowedRole="STUDENT">
-              <StudentDashboard onLogout={handleLogout} />
+              <AdminLayout onLogout={handleLogout} /> 
             </PrivateRoute>
           } 
-        />
+        >
+          <Route index element={<StudentDashboard />} />
+          <Route path="my-schedule" element={<StudentSchedule />} />
+        </Route>
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
