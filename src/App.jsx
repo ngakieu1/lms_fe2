@@ -16,6 +16,10 @@ import ClassManagement from './pages/admin/ClassManagement';
 import TeacherSchedule from './pages/teacher/TeacherSchedule';
 import StudentSchedule from './pages/student/StudentSchedule';
 import SessionManagement from './components/admin/SessionManagement';
+import UnifiedClassDetail from './pages/shared/UnifiedClassDetail';
+import AdminClassList from './pages/admin/AdminClassList';
+import StudentClassList from './pages/student/StudentClassList';
+import TeacherClassList from './pages/teacher/TeacherClassList';
 
 const PrivateRoute = ({ user, children, allowedRole }) => {
   if (!user.isAuthenticated) {
@@ -96,7 +100,9 @@ return (
           <Route path="approvals" element={<AdminApproval />} />
           <Route path="sessions" element={<SessionManagement />} />
           {/* <Route path="teacher-availability" element={<AdminTeacherAvailability />} /> */}
-          <Route path="classes" element={<ClassManagement />} />
+          <Route path="classes" element={<AdminClassList />} />
+          <Route path="classes/create" element={<ClassManagement />} />
+          <Route path="classes/:id" element={<UnifiedClassDetail />} />
         </Route>
         {/* TEACHER ROUTE */}
         <Route 
@@ -111,6 +117,8 @@ return (
           <Route path="materials" element={<MaterialManagement />} />
           <Route path="availability" element={<TeacherAvailabilityLogic />} />
           <Route path="my-schedule" element={<TeacherSchedule />} />
+          <Route path="classes" element={<TeacherClassList />} />
+          <Route path="classes/:id" element={<UnifiedClassDetail />} />
         </Route>
 
         {/* STUDENT ROUTE */}
@@ -124,6 +132,8 @@ return (
         >
           <Route index element={<StudentDashboard />} />
           <Route path="my-schedule" element={<StudentSchedule />} />
+          <Route path="classes" element={<StudentClassList />} />
+          <Route path="classes/:id" element={<UnifiedClassDetail />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

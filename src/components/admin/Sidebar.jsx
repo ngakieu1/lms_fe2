@@ -45,6 +45,7 @@ const teacherMenuItems = [
             {title: 'Kho tài liệu', path: '/teacher/materials', icon: <FileText size={18} />},
             { title: 'Quản lý lịch rảnh', path: '/teacher/availability', icon: <Calendar size={18} /> },
             { title: 'Lịch dạy của tôi', path: '/teacher/my-schedule', icon: <Calendar size={18} /> },
+            { title: 'Lớp học của tôi', path: '/teacher/classes', icon: <BookOpen size={18} /> },
         ],
     },
 ];
@@ -54,6 +55,7 @@ const studentMenuItems = [
         icon: <BookOpen size={20} />,
         children: [
             {title: 'Bảng điều khiển', path: '/student', icon: <Users size={18} /> },
+            {title: 'Lớp học của tôi', path: '/student/classes', icon: <BookOpen size={18} /> },
             { title: 'Lịch học của tôi', path: '/student/my-schedule', icon: <Calendar size={18} /> },
         ],
     },
