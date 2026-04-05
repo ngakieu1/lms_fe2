@@ -40,7 +40,7 @@ const StudentClassList = () => {
                     {classes.map((cls) => (
                         <div key={cls.id} style={styles.card}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                                {/* 🌟 HYPERLINK DÀNH CHO HỌC SINH */}
+                                {/* HYPERLINK DÀNH CHO HỌC SINH */}
                                 <h3 
                                     style={styles.className}
                                     onClick={() => navigate(`/student/classes/${cls.id}`)}
